@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+ 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+ 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+ 	xmlns:p="http://primefaces.org/ui"
+ 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+ 	template="WEB-INF/template/Layout.xhtml">
+ 	
+<ui:define name="titulo">
+	Cadastro de Obras
+</ui:define>
+
+<ui:define name="conteudo">
+	<f:metadata>
+		<f:viewAction action="#{gestaoObrasBean.todasObras}" />
+	</f:metadata>
+	
+	<h:form id="frm">
+		<p:messages id="messages" />
+	
+		<p:toolbar>
+			<f:facet name="left">
+				<p:inputText id="termoPesquisa" placeholder="Digite aqui um termo para pesquisa..." 
+					size="30" value="#{gestaoObrasBean.termoPesquisa}"/>
+				
+				<p:commandButton value="Pesquisar" icon="fa fa-search"
+					actionListener="#{gestaoObrasBean.pesquisar}" update="obrasDataTable messages"
+					process="@this termoPesquisa"/>
+				
+				<span class="ui-separator">
+	                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+	            </span>
+	            
+	            <p:commandButton value="Nova" icon="fa fa-plus"
+	            	actionListener="#{gestaoObrasBean.prepararNovaObra}" 
+	            	oncomplete="PF('obraDialogWidgetVar').show()"
+	            	update="obraDialog" process="@this"/>
+	            
+				<span class="ui-separator">
+	                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+	            </span>
+	            
+	            <p:commandButton title="Editar" icon="fa fa-edit" />
+	            
+	            <p:commandButton title="Excluir" icon="fa fa-trash" />
+	            
+				<span class="ui-separator">
+	                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+	            </span>
+	            
+	            <p:commandButton title="Exportar para o Excel" icon="fa fa-file-excel-o" />			
+			</f:facet>
+		</p:toolbar>
+		
+		<p:spacer height="20px" />
+		
+		<p:dataTable id="obrasDataTable" value="#{gestaoObrasBean.listaObras}"
+			var="obra" emptyMessage="Nenhuma informação a ser exibida"
+			paginator="true" rows="10" paginatorPosition="bottom">
+			<p:column headerText="Nome" sortBy="#{obra.nome}">
+				<h:outputText value="#{obra.nome}" />
+			</p:column>
+			
+			<p:column headerText="Descrição">
+				<h:outputText value="#{obra.descricao}" />
+			</p:column>
+			
+			<p:column headerText="Data publicação">
+				<h:outputText value="#{obra.dataPublicacao}" />
+			</p:column>
+			
+			<p:column headerText="Data exposição">
+				<h:outputText value="#{obra.dataExposicao}" />
+			</p:column>
+			
+			<p:column headerText="Autor">
+				<h:outputText value="#{obra.autor.nome}" />
+			</p:column>
+		</p:dataTable>
+		
+		<p:dialog id="obraDialog" header="Nova obra" widgetVar="obraDialogWidgetVar"
+			modal="true" resizable="false" closeOnEscape="true">
+			<p:messages id="obraMessages" />
+			
+			<h:panelGrid id="obraPanelGrid" columns="2"
+				rendered="#{gestaoObrasBean.obra ne null}">
+				<p:outputLabel value="Nome: " for="nome" />
+				<p:inputText id="nomeObra" size="80" 
+					value="#{gestaoObrasBean.obra.nome}" />
+				
+				<p:outputLabel value="Descrição: " for="descricao" />
+				<p:inputText id="descricao" size="80" maxlength="240" 
+					value="#{gestaoObrasBean.obra.descricao}"/>						
+				
+				<p:outputLabel value="Data Publicação: " for="dataPublicacao" />
+				<p:calendar id="dataPublicacao" pattern="dd/MM/yyyy" size="30" 
+					value="#{gestaoObrasBean.obra.dataPublicacao}"/>
+				
+				<p:outputLabel value="Data Exposição: " for="dataExposicao" />
+				<p:calendar id="dataExposicao" pattern="dd/MM/yyyy" size="30" 
+					value="#{gestaoObrasBean.obra.dataExposicao}"/>
+				
+				<p:outputLabel value="Autor: " for="autor" />
+				<p:autoComplete id="autor" size="80" 
+					value="#{gestaoObrasBean.obras.autor}"
+					completeMethod="#{gestaoObrasBean.completarAutor}" 
+					converter="#{gestaoObrasBean.autorConverter}"
+					var="autor"
+					itemLabel="#{autor.nomeo}" itemValue="#{autor}"/>
+				
+				<h:outputLabel />
+				<p:commandButton value="Salvar" actionListener="#{gestaoObrasBean.salvar}"
+					update="obraPanelGrid empresaMessages"
+					oncomplete="if (!args.validationFailed) PF('obraDialogWidgetVar').hide()" process="obraDialog"/>
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+</ui:define>
+
+</ui:composition>
