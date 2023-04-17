@@ -1,12 +1,12 @@
-package com.algaworks.erp.service;
+package com.alvesrenan.erp.service;
 
 import java.io.Serializable;
 
 import javax.inject.Inject;
 
-import com.algaworks.erp.model.Autor;
-import com.algaworks.erp.repository.Autores;
-import com.algaworks.erp.util.Transacional;
+import com.alvesrenan.erp.model.Autor;
+import com.alvesrenan.erp.repository.Autores;
+import com.alvesrenan.erp.util.Transacional;
 
 public class CadastroAutorService implements Serializable {
 

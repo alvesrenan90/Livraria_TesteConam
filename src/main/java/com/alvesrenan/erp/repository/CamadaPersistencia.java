@@ -1,4 +1,4 @@
-package com.algaworks.erp.repository;
+package com.alvesrenan.erp.repository;
 
 import java.util.Date;
 import java.util.List;
@@ -7,9 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.algaworks.erp.model.Autor;
-import com.algaworks.erp.model.Obra;
-import com.algaworks.erp.model.PaisOrigem;
+import com.alvesrenan.erp.model.Autor;
+import com.alvesrenan.erp.model.Obra;
+import com.alvesrenan.erp.model.PaisOrigem;
 
 public class CamadaPersistencia {
 	

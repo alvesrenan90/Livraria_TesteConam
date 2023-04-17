@@ -1,4 +1,4 @@
-package com.algaworks.erp.model;
+package com.alvesrenan.erp.model;
 
 
 import java.io.Serializable;

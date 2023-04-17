@@ -1,4 +1,4 @@
-package com.algaworks.erp.repository;
+package com.alvesrenan.erp.repository;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import com.algaworks.erp.model.Obra;
+import com.alvesrenan.erp.model.Obra;
 
 public class Obras implements Serializable {
 

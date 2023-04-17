@@ -1,4 +1,4 @@
-package com.algaworks.erp.controller;
+package com.alvesrenan.erp.controller;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-import com.algaworks.erp.model.Autor;
+import com.alvesrenan.erp.model.Autor;
 
 public class AutorConverter implements Converter {
     
